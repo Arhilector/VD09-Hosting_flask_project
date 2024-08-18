@@ -2,67 +2,116 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ХОМОкиллер дяди Джуса</title>
+    <title>Хомокиллер</title>
     <!-- Подключение Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        /* Фоновое изображение */
         body {
-            padding-top: 70px; /* Отступ для предотвращения перекрытия */
+            background: url('/static/images/homa.png') no-repeat center center fixed;
+            background-size: cover;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
         }
 
-        /* Мультяшный стиль шрифта */
-        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
-
-        body, .navbar, .nav-link, .navbar-brand {
-            font-family: 'Comic Neue', cursive;
+        /* Основной контейнер, чтобы он занимал всю высоту экрана */
+        .content {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
         }
 
-        /* Изменение фона и текста верхнего меню */
-        .navbar {
-            background-color: #ff4d4d; /* Красный цвет */
+        /* Стиль для красной круглой кнопки */
+        .btn-red-rounded {
+            background-color: red;
+            color: white;
+            border-radius: 50px;
+            border: 3px solid yellow; /* Желтая обводка */
+            padding: 20px 40px;
+            font-size: 1.5rem;
         }
 
-        .nav-link, .navbar-brand {
-            color: #fff !important; /* Белый цвет текста */
+        /* Стиль для счетчика кликов */
+        .click-counter {
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            border: 3px solid yellow;
+            padding: 15px 25px;
+            font-size: 1.5rem;
+            display: inline-block;
+            margin-top: 10px;
         }
 
-        .nav-link:hover, .navbar-brand:hover {
-            color: #ffcccc !important; /* Светло-красный при наведении */
+        /* Анимация увеличения-уменьшения при нажатии */
+        .btn-red-rounded:active + .click-counter {
+            animation: growShrink 0.2s;
         }
 
-        .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        .click-counter.animate {
+            animation: growShrink 0.2s;
+        }
+
+        /* Стиль для текста с эффектом свечения и анимацией тряски */
+        .glowing-text {
+            font-size: 3rem;
+            color: yellow;
+            text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000;
+            animation: shake 0.5s infinite;
+        }
+
+        /* Стиль для текста "КОЛИЧЕСТВО ОБЕЗВРЕЖЕННЫХ" */
+        .glowing-text-small {
+            font-size: 2rem;
+            color: yellow;
+            text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000;
+        }
+
+        /* Анимация тряски текста */
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
+        /* Анимация для счетчика */
+        @keyframes growShrink {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* Адаптивный стиль */
+        @media (max-width: 768px) {
+            .btn-red-rounded, .click-counter {
+                padding: 15px 30px;
+                font-size: 1.25rem;
+            }
         }
     </style>
 </head>
 <body>
 
-<script>
-    $(document).ready(function(){
-      $('a[href^="#footer"]').on('click', function(event) {
-        var target = $(this.getAttribute('href'));
-        if( target.length ) {
-          event.preventDefault();
-          $('html, body').stop().animate({
-            scrollTop: target.offset().top
-          }, 1000);
-        }
-      });
-    });
-  </script>
-</head>
-<body>
-
-<nav class="navbar navbar-expand-lg navbar-light fixed-top">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-    <a class="navbar-brand" href="#">
-    <img src="{{ url_for('static', filename='images/logo.png') }}" class="rounded-circle" alt="Company Logo" style="width: 20%; height: auto;">
-  </a>
-  <a class="navbar-brand" href="{{ url_for('index') }}"> ХОМОкиллер </a>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav me-auto">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{{ url_for('index') }}">Хомокиллер</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
             {% if current_user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('logout') }}">Выход из аккаунта</a>
@@ -75,11 +124,11 @@
                     <a class="nav-link" href="{{ url_for('register') }}">Регистрация</a>
                 </li>
             {% endif %}
-    </ul>
+        </ul>
     </div>
 </nav>
 
-<div class="container mt-4">
+<div class="container mt-4 content">
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
@@ -93,7 +142,7 @@
         {% endif %}
     {% endwith %}
 
-    <div class="content">
+    <div>
         {% block content %}
         {% endblock %}
     </div>
@@ -103,5 +152,14 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    document.querySelector('.btn-red-rounded').addEventListener('click', function() {
+        const counter = document.querySelector('.click-counter');
+        counter.classList.add('animate');
+        setTimeout(() => counter.classList.remove('animate'), 200);
+    });
+</script>
+
 </body>
 </html>

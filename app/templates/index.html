@@ -1,31 +1,11 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<div class="container-fluid d-flex justify-content-center align-items-center vh-100" style="background-image: url('{{ url_for('static', filename='images/homa.png') }}'); background-size: cover;">
+<div class="container mt-4">
     <div class="text-center">
-        <h1 class="display-4" style="color: red; font-family: 'Comic Sans MS', cursive, sans-serif;">МОЧИ ИХ</h1>
-        <p class="lead text-white" style="font-family: 'Comic Sans MS', cursive, sans-serif;">Количество замоченных хомяков - <span class="badge badge-light">{{ current_user.clicks }}</span></p>
+        <h1 class="display-4 glowing-text">МОЧИ ХОМЯКОВ!</h1>
+        <p class="lead glowing-text-small">КОЛИЧЕСТВО ОБЕЗВРЕЖЕННЫХ - <span class="click-counter">{{ current_user.clicks }}</span></p>
+        <a href="{{ url_for('click') }}" class="btn btn-red-rounded">ДАВИ</a>
     </div>
-
-    <!-- Добавляем четыре интерактивные кнопки -->
-    <a class="clickButton btn btn-danger btn-lg" style="font-size: 2rem; padding: 20px; border-radius: 50%; position: absolute; font-family: 'Comic Sans MS', cursive, sans-serif;" href="{{ url_for('click') }}">ДАВИ</a>
-    <a class="clickButton btn btn-danger btn-lg" style="font-size: 2rem; padding: 20px; border-radius: 50%; position: absolute; font-family: 'Comic Sans MS', cursive, sans-serif;" href="{{ url_for('click') }}">ДАВИ</a>
-    <a class="clickButton btn btn-danger btn-lg" style="font-size: 2rem; padding: 20px; border-radius: 50%; position: absolute; font-family: 'Comic Sans MS', cursive, sans-serif;" href="{{ url_for('click') }}">ДАВИ</a>
-    <a class="clickButton btn btn-danger btn-lg" style="font-size: 2rem; padding: 20px; border-radius: 50%; position: absolute; font-family: 'Comic Sans MS', cursive, sans-serif;" href="{{ url_for('click') }}">ДАВИ</a>
 </div>
-
-<script>
-    document.querySelectorAll('.clickButton').forEach(button => {
-        const randomX = Math.random() * (window.innerWidth - button.offsetWidth);
-        const randomY = Math.random() * (window.innerHeight - button.offsetHeight);
-        button.style.left = `${randomX}px`;
-        button.style.top = `${randomY}px`;
-
-        // Обработчик события для изменения текста кнопки
-        button.addEventListener('click', function(event) {
-            event.preventDefault();  // Предотвращаем переход по ссылке сразу
-            this.textContent = 'ЕЩЕ';
-            window.location.href = this.href;  // Переход по ссылке после изменения текста
-        });
-    });
-</script>
 {% endblock %}
